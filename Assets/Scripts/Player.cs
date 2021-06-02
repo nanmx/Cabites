@@ -33,7 +33,8 @@ public class Player : MonoBehaviour
         float move = CrossPlatformInputManager.GetAxis("Horizontal");
         if (move == 0.0f) move = Input.GetAxis("Horizontal");
         _grounded = IsGrounded();
-      if (Input.GetButtonDown("Boton_A") && IsGrounded() == true || Input.GetKeyDown(KeyCode.Space) && IsGrounded() == true || CrossPlatformInputManager.GetButtonDown("Boton_A")&& IsGrounded()== true){
+        Debug.Log(IsGrounded());
+      if (/*Input.GetButtonDown("Boton_A") && IsGrounded() == true || */Input.GetKeyDown(KeyCode.Space) /*&& IsGrounded() == true || CrossPlatformInputManager.GetButtonDown("Boton_A")&& IsGrounded()== true*/ ){
         _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpForce);
         StartCoroutine(ResetJumpRoutine());
           _playerAnim.Jump(true);
@@ -44,8 +45,8 @@ public class Player : MonoBehaviour
 
     }
 	bool IsGrounded(){
-      RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.down,0.58f, 1 << 8 );
-      Debug.DrawRay(transform.position, Vector2.down*0.58f, Color.green);
+      RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.down,0.1f, 1 << 8 );
+      Debug.DrawRay(transform.position, Vector2.down*0.1f, Color.green);
       if(hitInfo.collider != null){
         if(_resetJump==false){
                 _playerAnim.Jump(false);
